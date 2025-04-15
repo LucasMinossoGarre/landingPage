@@ -1,135 +1,819 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/tailwind.min.css" rel="stylesheet">
-    <title>17A | Software de Captação</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./imgs/icon.png" type="png">
+    <title>Belezza - Clínica de Estética Avançada</title>
+    <style>
+        /* Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #9c8a7d;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #7a6b62;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #9c8a7d;
+            color: #9c8a7d;
+        }
+        
+        .btn-outline:hover {
+            background-color: #9c8a7d;
+            color: white;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: #9c8a7d;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #9c8a7d;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #2c3e50;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #9c8a7d;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url('/api/placeholder/1600/800') center/cover no-repeat;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+        
+        /* Sobre Section */
+        .sobre {
+            background-color: #f9f9f9;
+        }
+        
+        .sobre-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .sobre-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sobre-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .sobre-text h2 {
+            margin-bottom: 20px;
+        }
+        
+        .sobre-text p {
+            margin-bottom: 20px;
+        }
+        
+        /* Serviços Section */
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .servico-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .servico-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .servico-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .servico-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .servico-card:hover .servico-img img {
+            transform: scale(1.1);
+        }
+        
+        .servico-content {
+            padding: 20px;
+        }
+        
+        .servico-content h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .servico-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* Depoimentos Section */
+        .depoimentos {
+            background-color: #f9f9f9;
+        }
+        
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .depoimento-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .depoimento-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: #e1e1e1;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .depoimento-texto {
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .depoimento-autor {
+            display: flex;
+            align-items: center;
+        }
+        
+        .depoimento-autor-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .depoimento-autor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .depoimento-autor-info h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .depoimento-autor-info p {
+            color: #9c8a7d;
+            font-size: 0.9rem;
+        }
+        
+        /* Contato Section */
+        .contato-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contato-info h3 {
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-icon {
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: #9c8a7d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .info-text h4 {
+            margin-bottom: 5px;
+        }
+        
+        .info-text p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #9c8a7d;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(156, 138, 125, 0.2);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: #9c8a7d;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .sociais {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #9c8a7d;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .sobre-content, .contato-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                text-align: center;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    
+    <!-- Header -->
     <header>
-        <nav> 
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Recursos</a></li>
-                <li><a href="#pricing">Preços</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
-        </nav>
+        <div class="container header-content">
+            <a href="#" class="logo">Belezza<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <section id="home">
-        <h1>17A Bot: Potencialize Seus Contatos Empresariais</h1>
-        <p style="color: black;">Automatize a captação de leads com rapidez e eficiência, e expanda seu alcance de negócios.</p>
-        <img src="./imgs/error-wait.gif" alt="Demonstração do GramBot em Ação">
-        <button style="margin-bottom: 50px;"><a href="#pricing" style="font-size: 25px;">Adquirir agora</a></button>
-    </section>
-
-    <section id="features">
-        <div class="feature">
-            <h2>Automatização Inteligente</h2>
-            <p>Automatize a coleta de números de telefone de empresas com rapidez e precisão.</p>
-        </div>
-        <div class="feature">
-            <h2>Captação Eficiente</h2>
-            <p>Maximize seus leads empresariais com um bot que trabalha 24/7 para você.</p>
-        </div>
-        <div class="feature">
-            <h2>Monitoramento Contínuo</h2>
-            <p>Veja os números de telefone captados em tempo real enquanto o bot faz o trabalho pesado.</p>
-        </div>
-    </section>
-
-    <section id="details">
-        <div class="detail">
-            <div class="detail-text">
-                <h2>17A Bot: Captação de Contatos sem Esforço</h2>
-                <p>Maximize seus leads empresariais com eficiência e rapidez. O 17A Bot coleta números de telefone de empresas, permitindo que você foque no que realmente importa.</p>
-            </div>
-            <div class="detail-image">
-                <img src="./imgs/error-wait.gif" alt="Comparação de Desempenho">
-            </div>
-        </div>
-        <div class="detail">
-            <div class="detail-text">
-                <h2>17A Bot: Captação ao Vivo</h2>
-                <p>Assista ao 17A Bot captando números de telefone diretamente do Google Meu Negócio. Descubra a simplicidade e eficácia do nosso sistema</p>
-            </div>
-            <div class="detail-image">
-                <img src="./imgs/error-wait.gif" alt="Demonstração do GramBot">
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Desperte sua beleza natural com tratamentos personalizados</h1>
+                <p class="hero-subtitle">Na Clínica Belezza, combinamos tecnologia avançada e profissionais especializados para oferecer resultados que transformam vidas.</p>
+                <div class="hero-btns">
+                    <a href="#contato" class="btn">Agendar Consulta</a>
+                    <a href="#servicos" class="btn btn-outline">Nossos Serviços</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="pricing">
-        <h2 style="color: rgb(236,227,202);">Preços</h2>
-        <div class="pricing-plan">
-            <h3>Plano Diário</h3>
-            <ul>
-                <li>Acesso ilimitado ao 17A</li>
-                <li>Atualizações prioritárias</li>
-                <li>Suporte premium 24/7</li>
-            </ul>
-            <p style="color: red;font-size: 22px;">R$ 19,90 /dia</p>
-            <a href="https://www.google.com"><button>Assinar Agora</button></a>
-        </div>
-        <div class="pricing-plan">
-            <h3>Plano Vitalício</h3>
-            <ul>
-                <li>Acesso ilimitado ao 17A</li>
-                <li>Atualizações prioritárias</li>
-                <li>Suporte premium 24/7</li>
-                <li style="color: rgba(15, 175, 15, 0.685);">Bônus de Software para instagram</li>
-            </ul>
-            <p style="color: red; font-size: 25px;">12x R$12,90</p>
-            <a href="https://www.google.com"><button >Comprar Agora</button></a>
-        </div>
-        <div class="pricing-plan">
-            <h3>Plano Mensal</h3>
-            <ul>
-                <li>Acesso ilimitado ao 17A</li>
-                <li>Atualizações prioritárias</li>
-                <li>Suporte premium 24/7</li>
-            </ul>
-            <p style="color: red;font-size: 22px;">R$ 49,90 /mês</p>
-            <a href="https://www.google.com"><button>Assinar Agora</button></a>
+    <!-- Sobre Section -->
+    <section id="sobre" class="section sobre">
+        <div class="container">
+            <h2 class="section-title">Sobre Nossa Clínica</h2>
+            <div class="sobre-content">
+                <div class="sobre-img">
+                    <img src="/api/placeholder/600/400" alt="Interior da Clínica Belezza">
+                </div>
+                <div class="sobre-text">
+                    <h2>Sua jornada para a beleza e bem-estar começa aqui</h2>
+                    <p>Fundada em 2010, a Clínica Belezza nasceu com a missão de proporcionar tratamentos estéticos de excelência em um ambiente acolhedor e sofisticado. Nosso compromisso com a inovação e resultados nos colocou entre as clínicas mais reconhecidas do país.</p>
+                    <p>Contamos com uma equipe multidisciplinar composta por profissionais altamente qualificados, equipamentos de última geração e produtos de qualidade superior. Cada tratamento é cuidadosamente personalizado para atender às necessidades específicas de cada cliente.</p>
+                    <p>Na Belezza, acreditamos que a verdadeira beleza está no equilíbrio entre corpo e mente, por isso, nossa abordagem visa não apenas a estética, mas também o bem-estar e a autoestima de nossos clientes.</p>
+                    <a href="#contato" class="btn">Conheça Nossa Equipe</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="faq">
-        <h2>Perguntas Frequentes</h2>
-        <details>
-            <summary>Como o 17A Bot funciona?</summary>
-            <p>O 17A Bot utiliza tecnologias de scraping para buscar e extrair números de telefone de empresas no Google Meu Negócio com base nas categorias que você define. Os números coletados são armazenados em um arquivo de texto e exibidos em uma interface gráfica intuitiva.</p>
-        </details>
-        <details>
-            <summary>Posso personalizar as buscas de empresas?</summary>
-            <p>Sim, você pode personalizar as buscas definindo as categorias de empresas que deseja captar. O bot realizará as buscas e extrações com base nesses critérios.</p>
-        </details>
-        <details>
-            <summary>Posso cancelar minha assinatura?</summary>
-            <p>Sim, você pode cancelar sua assinatura a qualquer momento. Basta entrar em contato com nosso suporte ao cliente para obter assistência.</p>
-        </details>
-        <details>
-            <summary>Existe suporte ao cliente?</summary>
-            <p>Sim, oferecemos suporte ao cliente para ajudá-lo com qualquer dúvida ou problema que possa surgir. Você pode entrar em contato conosco pelo e-mail de suporte fornecido após a compra</p>
-        </details>
-        <details>
-            <summary> O 17A Bot oferece reembolso?</summary>
-            <p>Sim, oferecemos uma política de reembolso de 7 dias para garantir a satisfação dos nossos clientes.</p>
-        </details>
+    <!-- Serviços Section -->
+    <section id="servicos" class="section">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <div class="servico-img">
+                        <img src="/api/placeholder/400/300" alt="Tratamentos Faciais">
+                    </div>
+                    <div class="servico-content">
+                        <h3>Tratamentos Faciais</h3>
+                        <p>Rejuvenescimento, limpeza de pele profunda, preenchimento, botox, bioestimuladores de colágeno e tratamentos para manchas e acne.</p>
+                        <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+                
+                <div class="servico-card">
+                    <div class="servico-img">
+                        <img src="/api/placeholder/400/300" alt="Tratamentos Corporais">
+                    </div>
+                    <div class="servico-content">
+                        <h3>Tratamentos Corporais</h3>
+                        <p>Redução de medidas, tratamento para celulite e flacidez, drenagem linfática, massagens modeladoras e relaxantes.</p>
+                        <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+                
+                <div class="servico-card">
+                    <div class="servico-img">
+                        <img src="/api/placeholder/400/300" alt="Depilação a Laser">
+                    </div>
+                    <div class="servico-content">
+                        <h3>Depilação a Laser</h3>
+                        <p>Tecnologia avançada para remoção permanente de pelos em diversas regiões do corpo, com conforto e eficácia.</p>
+                        <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+                
+                <div class="servico-card">
+                    <div class="servico-img">
+                        <img src="/api/placeholder/400/300" alt="Microagulhamento">
+                    </div>
+                    <div class="servico-content">
+                        <h3>Microagulhamento</h3>
+                        <p>Tratamento para estimular a produção de colágeno, melhorar a textura da pele e reduzir cicatrizes de acne e estrias.</p>
+                        <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+                
+                <div class="servico-card">
+                    <div class="servico-img">
+                        <img src="/api/placeholder/400/300" alt="Tratamentos Capilares">
+                    </div>
+                    <div class="servico-content">
+                        <h3>Tratamentos Capilares</h3>
+                        <p>Soluções para queda de cabelo, fortalecimento dos fios, hidratação profunda e tratamentos para o couro cabeludo.</p>
+                        <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+                
+                <div class="servico-card">
+                    <div class="servico-img">
+                        <img src="/api/placeholder/400/300" alt="Nutrição Estética">
+                    </div>
+                    <div class="servico-content">
+                        <h3>Nutrição Estética</h3>
+                        <p>Planos alimentares personalizados para complementar os tratamentos estéticos e promover a saúde de dentro para fora.</p>
+                        <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <a href="https://linkwhats.app/72f782" class="whatsapp-icon" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-    </a>
+    <!-- Depoimentos Section -->
+    <section id="depoimentos" class="section depoimentos">
+        <div class="container">
+            <h2 class="section-title">O Que Nossos Clientes Dizem</h2>
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <p class="depoimento-texto">Frequento a Clínica Belezza há mais de um ano e os resultados são impressionantes. A equipe é extremamente profissional e os tratamentos são sempre personalizados para minhas necessidades.</p>
+                    <div class="depoimento-autor">
+                        <div class="depoimento-autor-img">
+                            <img src="/api/placeholder/100/100" alt="Cliente Ana Silva">
+                        </div>
+                        <div class="depoimento-autor-info">
+                            <h4>Ana Silva</h4>
+                            <p>Cliente desde 2022</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="depoimento-card">
+                    <p class="depoimento-texto">O tratamento de rejuvenescimento facial superou todas as minhas expectativas. A atenção aos detalhes e o acompanhamento pós-procedimento fazem toda a diferença.</p>
+                    <div class="depoimento-autor">
+                        <div class="depoimento-autor-img">
+                            <img src="/api/placeholder/100/100" alt="Cliente Carlos Mendes">
+                        </div>
+                        <div class="depoimento-autor-info">
+                            <h4>Carlos Mendes</h4>
+                            <p>Cliente desde 2021</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="depoimento-card">
+                    <p class="depoimento-texto">Depois de três sessões de drenagem linfática, já notei uma diferença significativa. O ambiente da clínica é relaxante e a equipe me faz sentir muito bem-vinda a cada visita.</p>
+                    <div class="depoimento-autor">
+                        <div class="depoimento-autor-img">
+                            <img src="/api/placeholder/100/100" alt="Cliente Juliana Costa">
+                        </div>
+                        <div class="depoimento-autor-info">
+                            <h4>Juliana Costa</h4>
+                            <p>Cliente desde 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Contato Section -->
+    <section id="contato" class="section">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contato-content">
+                <div class="contato-info">
+                    <h3>Informações de Contato</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4>Endereço</h4>
+                            <p>Av. Paulista, 1000, Jardins</p>
+                            <p>São Paulo, SP - CEP 01310-100</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4>Telefone</h4>
+                            <p>(11) 3456-7890</p>
+                            <p>WhatsApp: (11) 98765-4321</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-text">
+                            <h4>Email</h4>
+                            <p>contato@clinicabelezza.com.br</p>
+                            <p>agendamento@clinicabelezza.com.br</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div class="info-text">
+                            <h4>Horário de Funcionamento</h4>
+                            <p>Segunda a Sexta: 9h às 20h</p>
+                            <p>Sábados: 9h às 18h</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contato-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" class="form-control" placeholder="Seu nome completo">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Seu email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" class="form-control" placeholder="Seu telefone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="servico">Serviço de Interesse</label>
+                            <select id="servico" class="form-control">
+                                <option value="">Selecione um serviço</option>
+                                <option value="facial">Tratamentos Faciais</option>
+                                <option value="corporal">Tratamentos Corporais</option>
+                                <option value="depilacao">Depilação a Laser</option>
+                                <option value="microagulhamento">Microagulhamento</option>
+                                <option value="capilar">Tratamentos Capilares</option>
+                                <option value="nutricao">Nutrição Estética</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" class="form-control" placeholder="Como podemos ajudar?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2024 17A Todos os direitos reservados.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Belezza</h3>
+                    <p>Sua clínica de estética avançada com os melhores profissionais e tecnologias do mercado. Tratamentos personalizados para resultados reais.</p>
+                    <div class="sociais">
+                        <a href="#" class="social-icon">FB</a>
+                        <a href="#" class="social-icon">IG</a>
+                        <a href="#" class="social-icon">YT</a>
+                        <a href="#" class="social-icon">TW</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#servicos">Nossos Serviços</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tratamentos Faciais</a></li>
+                        <li><a href="#">Tratamentos Corporais</a></li>
+                        <li><a href="#">Depilação a Laser</a></li>
+                        <li><a href="#">Microagulhamento</a></li>
+                        <li><a href="#">Tratamentos Capilares</a></li>
+                        <li><a href="#">Nutrição Estética</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Inscreva-se para receber novidades, promoções e dicas de beleza.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Seu email">
+                        </div>
+                        <button type="submit" class="btn">Inscrever-se</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Clínica Belezza. Todos os direitos reservados.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
